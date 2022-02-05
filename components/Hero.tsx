@@ -80,7 +80,8 @@ const Hero = () => {
 
   const scrollMeX = useRef<HTMLDivElement>(null);
 
-  const scrollXNavigation = (e: WheelEvent) => {
+  const scrollXNavigation = (e: React.WheelEvent) => {
+    const myTarget = e.target as HTMLDivElement;
     scrollMeX.current?.scrollBy({
       left: e.deltaY < 0 ? -150 : 150,
     });

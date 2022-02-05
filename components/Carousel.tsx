@@ -87,7 +87,7 @@ const Carousel = () => {
         );
         //! Scrolls into view
         secondSlide.current?.scrollIntoView();
-        firstVideo.current?.defaultPlaybackRate = 0.8;
+        // firstVideo.current?.defaultPlaybackRate = 0.8;
         firstVideo.current?.load();
         firstVideo.current?.play();
         setWhichSlideIsShowing('secondSlide');
