@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState, useLayoutEffect, useRef, LegacyRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 
 interface Content {
@@ -115,10 +115,9 @@ const Hero = () => {
         behavior: 'smooth',
       });
       //! Scrolls into view
-
       secondSlide.current?.scrollIntoView();
-      firstVideo.current?.load();
-      firstVideo.current?.play();
+      //   firstVideo.current?.load()
+      firstVideo.current?.play().catch((e) => console.log(e));
       break;
     case 2:
       firstSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_10000ms_ease-out_forwards]');
@@ -149,7 +148,6 @@ const Hero = () => {
       thirdSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
       //! Scrolls into view and play video
       fourthSlide.current?.scrollIntoView();
-      secondVideo.current?.load();
       secondVideo.current?.play();
       break;
     case 4:
@@ -165,23 +163,15 @@ const Hero = () => {
       //! Scrolls into view and play video
       fifthSlide.current?.children[0].children[0].classList.add('animate-[pictureZoomInX_10000ms_ease-out_forwards]');
       fifthSlide.current?.scrollIntoView();
-      secondVideo.current?.load();
       secondVideo.current?.play();
       break;
     default:
   }
 
-  //! Functions
-  const changeSlide = (e: React.MouseEvent, index: number) => {
-    //   console.log('index', index);
-    //   const myTarget = e.target as HTMLDivElement;
-    //   console.dir(myTarget);
-  };
-
   return (
     <div className="relative">
       {/* Carousel */}
-      <div className=" relative grid snap-x snap-mandatory grid-cols-[repeat(5,100vw)] grid-rows-[repeat(1,85vh)] overflow-y-hidden overflow-x-scroll scroll-smooth">
+      <div className="relative grid snap-x snap-mandatory grid-cols-[repeat(5,100vw)] grid-rows-[repeat(1,85vh)] overflow-y-hidden overflow-x-scroll scroll-smooth 2xl:overflow-x-hidden">
         {/*  First Slide */}
         <div className="relative h-full w-full snap-start snap-always" ref={firstSlide} aria-label="firstSlide">
           <Image
@@ -194,7 +184,7 @@ const Hero = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="absolute top-[160px] left-0 flex flex-col gap-6">
+            <div className="absolute bottom-[40%] left-[5%] flex flex-col gap-6">
               {/* Main Title */}
               <p className="font-cyberwayriders text-[3rem] leading-none text-[#f8f62c] md:text-[5rem] lg:text-[7rem] lg:leading-[150px] lg:tracking-[-2px]  lg:text-[#ffe60a] lg:text-opacity-60 lg:[text-shadow:_-1px_1px_2px_#ffff,0px_6px_10px_#bfe94c]">
                 {informationToDisplay[0].title}
@@ -206,7 +196,7 @@ const Hero = () => {
                   {informationToDisplay[0].description}
                   <span className="animate-[blinkOnTheEndOfText_900ms_infinite] border-b-4 border-white"></span>
                 </p>
-                <button className="absolute bottom-0 right-6 translate-y-3 bg-[#f8f62c] px-5 py-1 text-sm font-bold uppercase">
+                <button className="absolute bottom-0 right-6 translate-y-3 bg-yellow-300 px-5 py-1 text-sm font-bold uppercase">
                   Continue
                 </button>
               </div>
@@ -228,7 +218,7 @@ const Hero = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="absolute top-[160px] left-0 flex flex-col gap-6">
+            <div className="absolute bottom-[40%] left-[5%] flex flex-col gap-6">
               <p className="font-cyberwayriders text-[3rem] leading-none text-[#f8f62c] md:text-[5rem] lg:text-[7rem] lg:leading-[150px] lg:tracking-[-2px]  lg:text-[#ffe60a] lg:text-opacity-60 lg:[text-shadow:_-1px_1px_2px_#ffff,0px_6px_10px_#bfe94c]">
                 {informationToDisplay[1].title}
               </p>
@@ -259,7 +249,7 @@ const Hero = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="absolute top-[160px] left-0 flex flex-col gap-6">
+            <div className="absolute bottom-[40%] left-[5%] flex flex-col gap-6">
               <p className="font-cyberwayriders text-[3rem] leading-none text-[#f8f62c] md:text-[5rem] lg:text-[7rem] lg:leading-[150px] lg:tracking-[-2px]  lg:text-[#ffe60a] lg:text-opacity-60 lg:[text-shadow:_-1px_1px_2px_#ffff,0px_6px_10px_#bfe94c]">
                 {informationToDisplay[2].title}
               </p>
@@ -292,7 +282,7 @@ const Hero = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="absolute top-[160px] left-0 flex flex-col gap-6">
+            <div className="absolute bottom-[40%] left-[5%] flex flex-col gap-6">
               <p className="font-cyberwayriders text-[3rem] leading-none text-[#f8f62c] md:text-[5rem] lg:text-[7rem] lg:leading-[150px] lg:tracking-[-2px]  lg:text-[#ffe60a] lg:text-opacity-60 lg:[text-shadow:_-1px_1px_2px_#ffff,0px_6px_10px_#bfe94c]">
                 {informationToDisplay[3].title}
               </p>
@@ -323,7 +313,7 @@ const Hero = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="absolute top-[160px] left-0 flex flex-col gap-6">
+            <div className="absolute bottom-[40%] left-[5%] flex flex-col gap-6">
               <p className="font-cyberwayriders text-[3rem] leading-none text-[#f8f62c] md:text-[5rem] lg:text-[7rem] lg:leading-[150px] lg:tracking-[-2px]  lg:text-[#ffe60a] lg:text-opacity-60 lg:[text-shadow:_-1px_1px_2px_#ffff,0px_6px_10px_#bfe94c]">
                 {informationToDisplay[4].title}
               </p>
@@ -345,23 +335,21 @@ const Hero = () => {
 
       {/* Navigation */}
       <div
-        className="absolute left-0 right-0 bottom-0 backdrop-blur-lg"
-        onMouseEnter={() => (window.innerWidth < 1024 ? '' : (window.document.body.style.overflow = 'hidden'))}
-        onMouseLeave={() => (window.innerWidth < 1024 ? '' : (window.document.body.style.overflow = 'auto'))}
+        className="absolute left-0 right-0 bottom-0 bg-transparent backdrop-blur-[40px]"
+        onMouseEnter={() => (clientWidth < 1024 ? '' : (window.document.body.style.overflow = 'hidden'))}
+        onMouseLeave={() => (clientWidth < 1024 ? '' : (window.document.body.style.overflow = 'auto'))}
       >
         <div
-          className="lg:hideScroll lg:hideScrollChrome container m-auto grid grid-cols-[repeat(5,70vw)] grid-rows-[repeat(1,120px)] gap-x-4 overflow-x-scroll px-6 py-8 md:grid-cols-[repeat(5,35vw)] lg:grid-cols-[repeat(5,30vw)] 2xl:grid-cols-[repeat(5,1fr)]"
+          className="2xl:hideScroll 2xl:hideScrollChrome container m-auto grid grid-cols-[repeat(5,70vw)] grid-rows-[repeat(1,120px)] gap-x-4 overflow-x-scroll px-6 py-8 md:grid-cols-[repeat(5,35vw)] lg:grid-cols-[repeat(5,30vw)] 2xl:grid-cols-[repeat(5,1fr)] 2xl:overflow-x-hidden"
           ref={scrollMeX}
           onWheel={(e) => scrollXNavigation(e)}
         >
           {informationToDisplay.map((item, index: number) => (
             <div
               className={` grid cursor-pointer grid-cols-[40%,2fr] grid-rows-[auto] gap-x-4 bg-transparent bg-white ${
-                whichSlideToShow === index ? 'bg-yellow-400 text-black' : 'bg-opacity-20 text-white'
+                whichSlideToShow === index ? 'bg-yellow-300 text-black' : 'bg-opacity-20 text-white'
               } `}
-              onClick={(e) => {
-                changeSlide(e, index), setWhichSlideToShow(index);
-              }}
+              onClick={(e) => setWhichSlideToShow(index)}
               key={index}
             >
               <div className="pointer-events-none relative h-full w-full">

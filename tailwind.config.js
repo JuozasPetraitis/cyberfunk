@@ -36,6 +36,9 @@ module.exports = {
           to: { opacity: '1' },
         },
       },
+      animation: {
+        'bounce-slow': 'bounce 3000ms linear infinite',
+      },
     },
   },
   plugins: [],

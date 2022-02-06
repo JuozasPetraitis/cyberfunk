@@ -1,8 +1,10 @@
 import Image from 'next/image';
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface Content {
   title: string;
+  expandedTitle: string;
+  menuDescription: string;
   description: string;
   imageUrl: string;
   videoUrl: string;
@@ -10,26 +12,38 @@ interface Content {
 
 const informationToDisplay: Content[] = [
   {
-    title: 'CyberFunk',
-    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis optio quod aut.',
+    title: 'Extraordinary',
+    expandedTitle: 'Extraordinary claims require extraordinary evidence',
+    menuDescription: 'Brain is the seed of intelligence citizens of distant epochs quasar a mote of dust.',
+    description:
+      'Descended from astronomers a very small stage in a vast cosmic arena something incredible is waiting to be known made in the interiors of collapsing stars.',
     imageUrl: '/images/8.jpg',
     videoUrl: '',
   },
   {
-    title: 'Meet the future',
-    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis optio quod aut.',
+    title: 'Consciousness',
+    expandedTitle: 'Consciousness prime number the sky calls to us',
+    menuDescription: 'Suspended in a sunbeam globular star cluster the ash of stellar alchemy.',
+    description:
+      'Cosmic ocean ship of the imagination dream of the mind`s eye a still more glorious dawn awaits astonishment dream of the mind`s eye.',
     imageUrl: '',
     videoUrl: '/videos/3.mp4',
   },
   {
-    title: 'Next level GFX',
-    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis optio quod aut.',
+    title: 'Glorious Dawn',
+    expandedTitle: 'Birth a still more glorious dawn awaits',
+    menuDescription: 'With pretty stories for which there`s little good evidence tendrils of gossamer clouds.',
+    description:
+      'Invent the universe something incredible is waiting to be known gathered by gravity take root and flourish Drake Equation finite but unbounded.',
     imageUrl: '/images/7.jpg',
     videoUrl: '',
   },
   {
-    title: 'Team of teams',
-    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis optio quod aut.',
+    title: 'Intelligent',
+    expandedTitle: 'Intelligent beings across the centuries',
+    menuDescription: 'Uranus made in the interiors of collapsing stars take root and flourish.',
+    description:
+      'Invent the universe two ghostly white figures in coveralls and helmets are softly dancing emerged into consciousness a very small stage in a vast cosmic arena.',
     imageUrl: '',
     videoUrl: '/videos/4.mp4',
   },
@@ -38,7 +52,7 @@ const informationToDisplay: Content[] = [
 //! Main Component
 const Carousel = () => {
   //! UseState for slide index
-  const [whichSlideIsShowing, setWhichSlideIsShowing] = useState<string>('firstSlide');
+  const [whichSlideToShow, setWhichSlideToShow] = useState<number>(0);
   const [clientWidth, setClientWidth] = useState<number>(0);
 
   //! UseRef for slides
@@ -51,88 +65,74 @@ const Carousel = () => {
   const secondVideo = useRef<HTMLVideoElement>(null);
   const scrollMeY = useRef<HTMLDivElement>(null);
 
-  //! Functions
-  const changeSlide = (e: React.MouseEvent, index: number) => {
-    const myTarget = e.target as HTMLDivElement;
-    console.dir(myTarget.ariaLabel);
+  useEffect(() => {
+    setClientWidth(window.innerWidth);
+  }, []);
 
-    switch (myTarget.ariaLabel) {
-      case 'firstSlide':
-        //! Initiates scrolls inside div
-        scrollMeY.current?.scroll({
-          top: -400,
-          behavior: 'smooth',
-        });
-        //! Removes(resets) classList
-        firstSlide.current?.children[0].children[0].classList.add('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
-        thirdSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomInX_8000ms_ease-out_forwards]'
-        );
-        //! Scrolls into view
-        firstSlide.current?.scrollIntoView();
-        setWhichSlideIsShowing('firstSlide');
-        break;
-      case 'secondSlide':
-        //! Initiates scrolls inside div
-        scrollMeY.current?.scroll({
-          top: -50,
-          behavior: 'smooth',
-        });
-        //! Removes(resets) classList
-        firstSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomIn_8000ms_ease-out_forwards]'
-        );
-        thirdSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomInX_8000ms_ease-out_forwards]'
-        );
-        //! Scrolls into view
-        secondSlide.current?.scrollIntoView();
-        // firstVideo.current?.defaultPlaybackRate = 0.8;
-        firstVideo.current?.load();
-        firstVideo.current?.play();
-        setWhichSlideIsShowing('secondSlide');
-        break;
-      case 'thirdSlide':
-        //! Initiates scrolls inside div
-        scrollMeY.current?.scroll({
-          top: 350,
-          behavior: 'smooth',
-        });
-        //! Removes(resets) classList
-        firstSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomIn_8000ms_ease-out_forwards]'
-        );
-        thirdSlide.current?.children[0].children[0].classList.add('animate-[pictureZoomInX_8000ms_ease-out_forwards]');
-        //! Scrolls into view
-        thirdSlide.current?.scrollIntoView();
-        setWhichSlideIsShowing('thirdSlide');
-        break;
-      case 'fourthSlide':
-        //! Initiates scrolls inside div
-        scrollMeY.current?.scrollBy({
-          top: 200,
-          behavior: 'smooth',
-        });
-        //! Removes(resets) classList
-        firstSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomIn_8000ms_ease-out_forwards]'
-        );
-        thirdSlide.current?.children[0].children[0].classList.remove(
-          'animate-[pictureZoomIn_8000ms_ease-out_forwards]'
-        );
-        //! Scrolls into view and play video
-        secondVideo.current?.scrollIntoView();
-        secondVideo.current?.load();
-        secondVideo.current?.play();
-        setWhichSlideIsShowing('fourthSlide');
-        break;
-      default:
-    }
-  };
+  switch (whichSlideToShow) {
+    case 0:
+      //! Initiates scrolls inside div
+      scrollMeY.current?.scroll({
+        top: -400,
+        behavior: 'smooth',
+      });
+      //! Removes(resets) classList
+      firstSlide.current?.children[0].children[0].classList.add('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
+      thirdSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomInX_8000ms_ease-out_forwards]');
+      //! Scrolls into view
+      firstSlide.current?.scrollIntoView();
+
+      break;
+    case 1:
+      //! Initiates scrolls inside div
+      scrollMeY.current?.scroll({
+        top: -50,
+        behavior: 'smooth',
+      });
+      //! Removes(resets) classList
+      firstSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
+      thirdSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomInX_8000ms_ease-out_forwards]');
+      //! Scrolls into view
+      secondSlide.current?.scrollIntoView();
+      if (firstVideo.current !== null) {
+        firstVideo.current.defaultPlaybackRate = 0.8;
+      }
+
+      firstVideo.current?.play();
+
+      break;
+    case 2:
+      //! Initiates scrolls inside div
+      scrollMeY.current?.scroll({
+        top: 350,
+        behavior: 'smooth',
+      });
+      //! Removes(resets) classList
+      firstSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
+      thirdSlide.current?.children[0].children[0].classList.add('animate-[pictureZoomInX_8000ms_ease-out_forwards]');
+      //! Scrolls into view
+      thirdSlide.current?.scrollIntoView();
+      break;
+    case 3:
+      //! Initiates scrolls inside div
+      scrollMeY.current?.scrollBy({
+        top: 200,
+        behavior: 'smooth',
+      });
+      //! Removes(resets) classList
+      firstSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
+      thirdSlide.current?.children[0].children[0].classList.remove('animate-[pictureZoomIn_8000ms_ease-out_forwards]');
+      //! Scrolls into view and play video
+      secondVideo.current?.scrollIntoView();
+      secondVideo.current?.play();
+
+      break;
+    default:
+  }
 
   //! Main return
   return (
-    <div className="relative">
+    <div className="relative my-20 [box-shadow:0px_-2px_15px_2px_#3ea5cc]">
       <div className="relative grid snap-x snap-mandatory grid-cols-[repeat(4,100vw)] grid-rows-[repeat(1,100vh)] overflow-x-scroll scroll-smooth lg:overflow-x-hidden">
         {/*  First Slide */}
         <div className="relative h-full w-full snap-start snap-always" ref={firstSlide} aria-label="firstSlide">
@@ -146,12 +146,12 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-4 md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-[2rem] uppercase leading-5 tracking-tighter text-white">
-                {informationToDisplay[0].description}
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+                {informationToDisplay[0].expandedTitle}
               </p>
-              <p className="text-[1.2rem] leading-6 text-white">{informationToDisplay[0].description}</p>
-              <button className="mt-6 bg-pink-600 px-12 py-3 text-[1rem] font-medium uppercase text-white">
+              <p className="text-lg leading-6 text-white">{informationToDisplay[0].description}</p>
+              <button className="mt-4 rounded-[4px] border border-white bg-transparent px-12 py-3 font-bold text-white backdrop-blur-2xl hover:shadow-md hover:shadow-cyan-700">
                 Read the story
               </button>
             </div>
@@ -172,12 +172,12 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-4 md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-[2rem] uppercase leading-5 tracking-tighter text-white">
-                {informationToDisplay[3].description}
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+                {informationToDisplay[1].expandedTitle}
               </p>
-              <p className="text-[1.2rem] leading-6 text-white">{informationToDisplay[3].description}</p>
-              <button className="mt-6 bg-pink-600 px-12 py-3 text-[1rem] font-medium uppercase text-white">
+              <p className="text-lg leading-6 text-white">{informationToDisplay[1].description}</p>
+              <button className="mt-4 rounded-[4px] border border-white bg-transparent px-12 py-3 font-bold text-white backdrop-blur-2xl hover:shadow-md hover:shadow-cyan-700">
                 Read the story
               </button>
             </div>
@@ -196,12 +196,12 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-4 md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-[2rem] uppercase leading-5 tracking-tighter text-white">
-                {informationToDisplay[2].description}
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+                {informationToDisplay[2].expandedTitle}
               </p>
-              <p className="text-[1.2rem] leading-6 text-white">{informationToDisplay[0].description}</p>
-              <button className="mt-6 bg-pink-600 px-12 py-3 text-[1rem] font-medium uppercase text-white">
+              <p className="text-lg leading-6 text-white">{informationToDisplay[2].description}</p>
+              <button className="mt-4 rounded-[4px] border border-white bg-transparent px-12 py-3 font-bold text-white backdrop-blur-2xl hover:shadow-md hover:shadow-cyan-700">
                 Read the story
               </button>
             </div>
@@ -217,12 +217,12 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-4 md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-[2rem] uppercase leading-5 tracking-tighter text-white">
-                {informationToDisplay[3].description}
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%]">
+              <p className="font-cyberfreight text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
+                {informationToDisplay[3].expandedTitle}
               </p>
-              <p className="text-[1.2rem] leading-6 text-white">{informationToDisplay[3].description}</p>
-              <button className="mt-6 bg-pink-600 px-8 py-2 text-[1rem] font-medium uppercase text-white">
+              <p className="text-lg leading-6 text-white">{informationToDisplay[3].description}</p>
+              <button className="mt-4 rounded-[4px] border border-white bg-transparent px-12 py-3 font-bold text-white backdrop-blur-2xl hover:shadow-md hover:shadow-cyan-700">
                 Read the story
               </button>
             </div>
@@ -236,53 +236,22 @@ const Carousel = () => {
           className="hideScroll hideScrollChrome flex h-[30rem] w-2/5 flex-col gap-6 overflow-y-scroll"
           ref={scrollMeY}
         >
-          <div
-            className={`flex cursor-pointer flex-col gap-2 bg-transparent bg-white px-8 py-6 ${
-              whichSlideIsShowing === 'firstSlide' ? 'bg-opacity-40' : 'bg-opacity-10'
-            } `}
-            onClick={(e) => {
-              changeSlide(e, 1);
-            }}
-            aria-label="firstSlide"
-          >
-            <p className="pointer-events-none text-lg font-bold text-white">{informationToDisplay[0].title}</p>
-            <p className="pointer-events-none text-slate-300">{informationToDisplay[0].description}</p>
-          </div>
-
-          <div
-            className={`flex cursor-pointer flex-col gap-2 bg-transparent bg-white px-8 py-6 ${
-              whichSlideIsShowing === 'secondSlide' ? 'bg-opacity-40' : 'bg-opacity-10'
-            } `}
-            onClick={(e) => {
-              changeSlide(e, 2);
-            }}
-            aria-label="secondSlide"
-          >
-            <p className="pointer-events-none text-lg font-bold text-white">{informationToDisplay[0].title}</p>
-            <p className="pointer-events-none text-slate-300">{informationToDisplay[0].description}</p>
-          </div>
-
-          <div
-            className={`flex cursor-pointer flex-col gap-2 bg-transparent bg-white px-8 py-6 ${
-              whichSlideIsShowing === 'thirdSlide' ? 'bg-opacity-40' : 'bg-opacity-10'
-            } `}
-            onClick={(e) => changeSlide(e, 3)}
-            aria-label="thirdSlide"
-          >
-            <p className="pointer-events-none text-lg font-bold text-white">{informationToDisplay[0].title}</p>
-            <p className="pointer-events-none text-slate-300">{informationToDisplay[0].description}</p>
-          </div>
-
-          <div
-            className={`flex cursor-pointer flex-col gap-2 bg-transparent bg-white px-8 py-6 ${
-              whichSlideIsShowing === 'fourthSlide' ? 'bg-opacity-40' : 'bg-opacity-10'
-            } `}
-            onClick={(e) => changeSlide(e, 4)}
-            aria-label="fourthSlide"
-          >
-            <p className="pointer-events-none text-lg font-bold text-white">{informationToDisplay[0].title}</p>
-            <p className="pointer-events-none text-slate-300">{informationToDisplay[0].description}</p>
-          </div>
+          {informationToDisplay.map((item, index: number) => (
+            <div
+              className={`flex cursor-pointer flex-col gap-2 bg-transparent bg-white px-8 py-8 ${
+                whichSlideToShow === index ? 'bg-opacity-40' : 'bg-opacity-10'
+              } `}
+              onClick={(e) => setWhichSlideToShow(index)}
+              key={index}
+            >
+              <p className="pointer-events-none text-xl font-bold text-white 2xl:text-2xl">
+                {informationToDisplay[index].title}
+              </p>
+              <p className="pointer-events-none text-white 2xl:text-lg">
+                {informationToDisplay[index].menuDescription}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

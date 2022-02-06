@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Hero from '../components/Hero';
 import ProductDescription from 'components/ProductDescription';
 import About from 'components/About';
-import FeaturedOn from 'components/FeaturedOn';
+import SocialMedia from 'components/SocialMedia';
 import Carousel from 'components/Carousel';
 
 const Home: NextPage = () => {
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <main className="m-auto max-w-[3000px] scroll-smooth bg-black">
         <Hero />
         <ProductDescription />
-        <FeaturedOn />
+        <SocialMedia />
         <Carousel />
         <About />
       </main>
