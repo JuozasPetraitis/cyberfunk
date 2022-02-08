@@ -146,8 +146,8 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[40%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
                 {informationToDisplay[0].expandedTitle}
               </p>
               <p className="text-lg leading-6 text-white">{informationToDisplay[0].description}</p>
@@ -172,8 +172,8 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[40%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
                 {informationToDisplay[1].expandedTitle}
               </p>
               <p className="text-lg leading-6 text-white">{informationToDisplay[1].description}</p>
@@ -196,8 +196,8 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%] 2xl:w-[30%]">
-              <p className="font-cyberfreight text-5xl uppercase leading-8 tracking-tighter text-white">
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[40%] 2xl:w-[30%]">
+              <p className="font-cyberfreight text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
                 {informationToDisplay[2].expandedTitle}
               </p>
               <p className="text-lg leading-6 text-white">{informationToDisplay[2].description}</p>
@@ -217,8 +217,8 @@ const Carousel = () => {
 
           {/* Content */}
           <div className="container absolute left-0 right-0 m-auto flex h-full w-full flex-col items-center justify-center md:items-end">
-            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[35%]">
-              <p className="font-cyberfreight text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
+            <div className="z-20 mx-8 flex flex-col items-center gap-8 bg-black/50 py-4 px-4 backdrop-blur-xl md:w-2/5 lg:w-[40%]">
+              <p className="font-cyberfreight text-3xl text-3xl uppercase leading-8 tracking-tighter text-white lg:text-5xl">
                 {informationToDisplay[3].expandedTitle}
               </p>
               <p className="text-lg leading-6 text-white">{informationToDisplay[3].description}</p>
