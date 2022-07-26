@@ -1,32 +1,28 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import type { NextPage } from "next";
+import Head from "next/head";
 
 //! Components
-import Hero from '../components/Hero';
-import ProductDescription from 'components/ProductDescription';
-import About from 'components/About';
-import SocialMedia from 'components/SocialMedia';
-import Carousel from 'components/Carousel';
+import ProductDescription from "components/ProductDescription";
+import About from "components/About";
+import SocialMedia from "components/SocialMediaAtom";
+import HeroAtom from "components/HeroAtom";
+import CarouselAtom from "components/CarouselAtom";
 
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Cyberpunk</title>
+        <title>Cyberfunk</title>
       </Head>
-      <main className="m-auto max-w-[3000px] scroll-smooth bg-black">
-        <Hero />
+
+      <main className="mx-auto max-w-screen-3xl">
+        <HeroAtom />
         <ProductDescription />
         <SocialMedia />
-        <Carousel />
+        <CarouselAtom />
         <About />
+        <footer className="border-white bg-black py-4 text-center text-white">Copyright © {new Date().getFullYear()} Labs Inc.</footer>
       </main>
-
-      <footer className="m-auto max-w-[3000px] border-t border-white bg-black">
-        <div className="flex items-center justify-center py-4 text-white">
-          <p>Copyright © {new Date().getFullYear()} Labs Inc.</p>
-        </div>
-      </footer>
     </div>
   );
 };
